@@ -20,7 +20,7 @@
                             <div class="col-md-12">
                                 <div class="card border-0">
                                     <div class="card-body">
-                                        <form action="{{ route('tujuan.update', $tujuans->id) }}" method="POST" enctype="multipart/form-data">
+                                        <form action="{{ route('tujuan.update', $tujuans->kode_tujuan) }}" method="POST" enctype="multipart/form-data">
                                         
                                             @csrf
                                             @method('PUT') <!-- Pastikan menggunakan metode PUT -->
