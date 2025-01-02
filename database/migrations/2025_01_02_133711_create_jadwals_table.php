@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kendaraans', function (Blueprint $table) {
-            $table->id('kode_kendaraan');
-            $table->string('nama_kendaraan');
-            $table->text('desc_kendaraan');
-            $table->string('cost_kendaraan');
+        Schema::create('jadwals', function (Blueprint $table) {
+            $table->id('kode_jadwal');
+            $table->time('jam_berangkat');
+            $table->time('jam_tiba');
+            $table->text('desc_jadwal');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kendaraans');
+        Schema::dropIfExists('jadwals');
     }
 };

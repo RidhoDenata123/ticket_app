@@ -43,6 +43,10 @@
                     <ul class="navbar-nav ms-auto">
 
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ __('/admin/jadwal') }}">Jadwal</a>
+                    </li>
+                    
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ __('/admin/kendaraan') }}">Kendaraan</a>
                     </li>
 

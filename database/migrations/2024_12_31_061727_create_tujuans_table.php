@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tujuans', function (Blueprint $table) {
             $table->id('kode_tujuan');
             $table->string('nama_tujuan');
-            $table->string('desc_tujuan');
+            $table->text('desc_tujuan');
             $table->string('ticket_price');
             $table->timestamps();
         });
