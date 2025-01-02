@@ -48,16 +48,14 @@ class HomeController extends Controller
     }
 
          /**
-     * Show the application tujuan create.
+     * Show the application kendaraan.
      
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function adminTujuanCreate(): View
+    public function adminKendaraan(): View
     {
-        return view('adminTujuanCreate');
+        return view('adminKendaraan');
     }
-
-    
 
     /**
      * Show the application dashboard.

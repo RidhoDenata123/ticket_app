@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('CRUD Tujuan') }}</div>
+                <div class="card-header">{{ __('CRUD Kendaraan') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -28,11 +28,11 @@
 
                                             <div class="col-md-6">
                                                     <div class="form-group mb-3">
-                                                        <label class="font-weight-bold">KODE TUJUAN</label>
-                                                        <input type="text" class="form-control @error('kode_tujuan') is-invalid @enderror" name="kode_tujuan" value="{{ old('kode_tujuan', $tujuans->kode_tujuan) }}" placeholder="Masukkan kode Tujuan Perjalanan" readonly>
+                                                        <label class="font-weight-bold">KODE KENDARAAN</label>
+                                                        <input type="text" class="form-control @error('kode_kendaraan') is-invalid @enderror" name="kode_kendaraan" value="{{ old('kode_kendaraan', $kendaraans->kode_kendaraan) }}" placeholder="Masukkan kode kendaraan" readonly>
                                                     
-                                                        <!-- error message untuk kode_tujuan -->
-                                                        @error('kode_tujuan')
+                                                        <!-- error message untuk kode_kendaraan -->
+                                                        @error('kode_kendaraan')
                                                             <div class="alert alert-danger mt-2">
                                                                 {{ $message }}
                                                             </div>
@@ -42,11 +42,11 @@
 
                                                 <div class="col-md-6">
                                                     <div class="form-group mb-3">
-                                                        <label class="font-weight-bold">TUJUAN</label>
-                                                        <input type="text" class="form-control @error('nama_tujuan') is-invalid @enderror" name="nama_tujuan" value="{{ old('nama_tujuan', $tujuans->nama_tujuan) }}" placeholder="Masukkan Tujuan Perjalanan" readonly>
+                                                        <label class="font-weight-bold">NAMA KENDARAAN</label>
+                                                        <input type="text" class="form-control @error('nama_kendaraan') is-invalid @enderror" name="nama_kendaraan" value="{{ old('nama_kendaraan', $kendaraans->nama_kendaraan) }}" placeholder="Masukkan Nama Kendaraan" readonly>
                                                     
-                                                        <!-- error message untuk nama_tujuan -->
-                                                        @error('nama_tujuan')
+                                                        <!-- error message untuk nama_kendaraan -->
+                                                        @error('nama_kendaraan')
                                                             <div class="alert alert-danger mt-2">
                                                                 {{ $message }}
                                                             </div>
@@ -59,10 +59,10 @@
 
                                             <div class="form-group mb-3">
                                                 <label class="font-weight-bold">DESKRIPSI</label>
-                                                <textarea class="form-control @error('desc_tujuan') is-invalid @enderror" name="desc_tujuan" rows="5" placeholder="Masukkan deskripsi tujuan"readonly>{{ old('desc_tujuan', $tujuans->desc_tujuan) }}</textarea>
+                                                <textarea class="form-control @error('desc_kendaraan') is-invalid @enderror" name="desc_kendaraan" rows="5" placeholder="Masukkan deskripsi kendaraan"readonly>{{ old('desc_kendaraan', $kendaraans->desc_kendaraan) }}</textarea>
                                             
-                                                <!-- error message untuk desc_tujuan -->
-                                                @error('desc_tujuan')
+                                                <!-- error message untuk desc_kendaraan -->
+                                                @error('desc_kendaraan')
                                                     <div class="alert alert-danger mt-2">
                                                         {{ $message }}
                                                     </div>
@@ -70,11 +70,11 @@
                                             </div>
 
                                             <div class="form-group mb-3">
-                                                        <label class="font-weight-bold">TICKET PRICE</label>
-                                                        <input type="number" class="form-control @error('ticket_price') is-invalid @enderror" name="ticket_price" value="{{ old('ticket_price', $tujuans->ticket_price) }}" placeholder="Masukkan Harga Ticket" readonly>
+                                                        <label class="font-weight-bold">COST</label>
+                                                        <input type="number" class="form-control @error('cost_kendaraan') is-invalid @enderror" name="cost_kendaraan" value="{{ old('cost_kendaraan', $kendaraans->cost_kendaraan) }}" placeholder="Masukkan cost kendaraan" readonly>
                                                     
-                                                        <!-- error message untuk ticket_price -->
-                                                        @error('ticket_price')
+                                                        <!-- error message untuk cost_kendaraan -->
+                                                        @error('cost_kendraan')
                                                             <div class="alert alert-danger mt-2">
                                                                 {{ $message }}
                                                             </div>
@@ -83,10 +83,10 @@
 
 
                                                     <div class="modal-footer">
-                                                        <a href="/admin/tujuan" class="btn btn-md btn-basic me-4">CANCEL</a>
+                                                        <a href="/admin/kendaraan" class="btn btn-md btn-basic me-4">CANCEL</a>
 
                                                         <div class="btn-group">
-                                                            <a href="/admin/tujuan" class="btn btn-md btn-dark me-4">OK</a>
+                                                            <a href="/admin/kendaraan" class="btn btn-md btn-dark me-4">OK</a>
                                                         </div>	
 
                                                     </div>   

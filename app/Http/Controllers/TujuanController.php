@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-//import model product
+//import model 
 use App\Models\Tujuan; 
 
 //import return type View
@@ -81,7 +81,7 @@ class TujuanController extends Controller
      */
     public function show(string $kode_tujuan): View
     {
-        //get product by kode_tujuan
+        //get tujuan by kode_tujuan
         $tujuans = Tujuan::where('kode_tujuan', $kode_tujuan)->firstOrFail();
     
         //render view with product
@@ -99,10 +99,10 @@ class TujuanController extends Controller
      */
     public function edit(string $kode_tujuan): View
     {
-        //get product by kode_tujuan
+        //get tujuan by kode_tujuan
         $tujuans = Tujuan::where('kode_tujuan', $kode_tujuan)->firstOrFail();
     
-        //render view with product
+        //render view with tujuan
         return view('adminTujuanEdit', compact('tujuans'));
     }
         
@@ -123,10 +123,10 @@ class TujuanController extends Controller
             'ticket_price'        => 'required|numeric'
         ]);
 
-        //get product by kode_tujuan
+        //get tujuan by kode_tujuan
         $tujuans = Tujuan::where('kode_tujuan', $kode_tujuan)->firstOrFail();
 
-        //update product 
+        //update tujuan 
         $tujuans->update([
             'nama_tujuan'         => $request->nama_tujuan,
             'desc_tujuan'         => $request->desc_tujuan,
@@ -147,10 +147,10 @@ class TujuanController extends Controller
      */
     public function destroy($kode_tujuan): RedirectResponse
     {
-        //get product by kode_tujuan
+        //get tujuan by kode_tujuan
         $tujuans = Tujuan::where('kode_tujuan', $kode_tujuan)->firstOrFail();
 
-        //delete product
+        //delete tujuan
         $tujuans->delete();
 
         //redirect to index

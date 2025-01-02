@@ -30,7 +30,7 @@
                                                 <th scope="col">Tujuan</th>
                                                 <th scope="col">Deskripsi</th>
                                                 <th scope="col">Harga Tiket</th>
-                                                <th scope="col" style="width: 20%">ACTIONS</th>
+                                                <th scope="col" style="width: 20%">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
