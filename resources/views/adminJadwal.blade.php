@@ -23,7 +23,7 @@
                                     <div class="card-body">
                                         <a href="/admin/jadwal/create" class="btn btn-md btn-primary mb-3"><i class='fas fa-plus'></i> Add</a> 
                                         <a href="/admin/jadwal" class="btn btn-md btn-outline-dark mb-3"><i class='fa fa-refresh'></i></a>
-                                        <table class="table table-bordered">
+                                        <table id="jadwalTable" class="table table-bordered">
                                         <thead>
                                             <tr>
                                                 <th scope="col">No.</th>
@@ -65,7 +65,12 @@
                         </div>
                     </div>
 
-                    
+                <script>
+                    $(document).ready(function() {
+                        $('#jadwalTable').DataTable();
+                    });
+
+                </script>
 
                 </div>
             </div>

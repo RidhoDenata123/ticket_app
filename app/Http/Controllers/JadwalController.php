@@ -134,6 +134,8 @@ class JadwalController extends Controller
                 //redirect to index
                 return redirect()->to('/admin/jadwal')->with(['success' => 'Data Berhasil Diubah!']);
             }
+
+            
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
             /**

@@ -33,4 +33,28 @@ class Ticket extends Model
         'status_ticket',
         'kode_verifikasi',
     ];
+
+     // Definisikan relasi ke model User
+        public function user()
+        {
+            return $this->belongsTo(User::class, 'id_user');
+        }
+
+    // Definisikan relasi ke model Tujuan
+        public function tujuan()
+        {
+            return $this->belongsTo(Tujuan::class, 'kode_tujuan');
+        }
+
+    // Definisikan relasi ke model Kendaraan
+        public function kendaraan()
+        {
+            return $this->belongsTo(Kendaraan::class, 'kode_kendaraan');
+        }
+
+    // Definisikan relasi ke model jadwal
+        public function jadwal()
+        {
+            return $this->belongsTo(Jadwal::class, 'kode_jadwal');
+        }
 }

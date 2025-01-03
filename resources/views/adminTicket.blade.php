@@ -30,6 +30,7 @@
                                                 <th scope="col">Kode.Ticket</th>
                                                 <th scope="col">Customer</th>
                                                 <th scope="col">Tujuan</th>
+                                                <th scope="col">Kendaraan</th>
                                                 <th scope="col">Status Ticket</th>
                                                 <th scope="col" style="width: 20%">Actions</th>
                                             </tr>
@@ -38,18 +39,22 @@
                                             @forelse ($tickets as $row)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td> <!-- Nomor otomatis -->
-                                                    <td>{{ $row->no_ticket }}</td>
-                                                    <td>{{ $row->id_user }}</td>
-                                                    <td>{{ $row->kode_tujuan }}</td>
+                                                    <td>{{ $row->kode_ticket }}</td>
+                                                    <td>{{ $row->user->name }}</td>
+                                                    <td>{{ $row->tujuan->nama_tujuan }}</td>
+                                                    <td>{{ $row->kendaraan->nama_kendaraan }}</td>
                                                     <td>{{ $row->status_ticket }}</td>
                                                     <td class="text-center">
-                                                        <form id="delete-form-{{ $row->kode_ticket }}" action="{{ route('ticket.destroy', $row->kode_ticket) }}" method="POST" style="display: none;">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                        </form>
+                                                        
+                                                        @if ($row->status_ticket == 'Menunggu Pembayaran')
+                                                            <a href="{{ route('ticket.show', $row->kode_ticket) }}" class="btn btn-sm btn-secondary"> <i class='far fa-eye'></i> </a>
+                                                            <a href="{{ route('ticket.confirm', $row->kode_ticket) }}" class="btn btn-sm btn-success"> <i class='far fa-check-circle'> </i></a>
+                                                           
+                                                            
+                                                        @else
                                                         <a href="{{ route('ticket.show', $row->kode_ticket) }}" class="btn btn-sm btn-secondary"> <i class='far fa-eye'></i> </a>
-                                                        <a href="{{ route('ticket.edit', $row->kode_ticket) }}" class="btn btn-sm btn-warning"> <i class='fas fa-edit'> </i></a>
-                                                        <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete({{ $row->kode_ticket }})"> <i class='fas fa-trash-alt'></i> </button>
+
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @empty

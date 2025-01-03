@@ -107,7 +107,7 @@ class TujuanController extends Controller
     }
         
 
-        /**
+    /**
      * update
      *
      * @param  mixed $request
