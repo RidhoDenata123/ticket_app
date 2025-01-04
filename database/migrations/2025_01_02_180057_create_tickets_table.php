@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('cost_kendaraan');
             $table->string('total_tagihan');
             $table->date('tgl_order');
-            $table->dateTime('tgl_bayar')->nullable(); // Membuat kolom tgl_bayar nullable
+            $table->string('tgl_bayar')->nullable(); // Membuat kolom tgl_bayar nullable
             $table->string('status_ticket');
             $table->string('kode_verifikasi');
 

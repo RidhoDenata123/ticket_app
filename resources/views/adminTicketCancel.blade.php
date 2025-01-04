@@ -187,9 +187,9 @@
 
                                         <!-- hidden stuff -->
 
-                                            <input type="hidden" class="form-control" name="tgl_bayar" id="tgl_bayar" readonly>
-                                            <input type="hidden" class="form-control" name="status_ticket"  value="Pembayaran Sukses">
-                                            <input type="hidden" class="form-control" name="kode_verifikasi" id="kode_verifikasi" readonly>
+                                            <input type="hidden" class="form-control" name="tgl_bayar" value="{{ old('tgl_bayar', $tickets->tgl_bayar) }}">
+                                            <input type="hidden" class="form-control" name="status_ticket"  value="Transaksi dibatalkan">
+                                            <input type="hidden" class="form-control" name="kode_verifikasi" value="-">
 
 
 
@@ -198,7 +198,7 @@
                                                     <div class="modal-footer">
                                                         <a href="/admin/ticket" class="btn btn-md btn-basic me-4">CANCEL</a>
 
-                                                        <button type="submit" class="btn btn-md btn-success"> <i class="far fa-check-circle"></i> Confirm Payment</button>
+                                                        <button type="submit" class="btn btn-md btn-danger"> <i class="far fa-times-circle"></i> Cancel Transaction</button>
 
                                                     </div>   
 

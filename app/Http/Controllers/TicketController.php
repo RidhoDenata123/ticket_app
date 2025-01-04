@@ -240,7 +240,7 @@ class TicketController extends Controller
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/**
+    /**
      * confirm
      *
      * @param  mixed $kode_ticket
@@ -257,6 +257,25 @@ class TicketController extends Controller
     
         // Mengirim data tiket ke view
         return view('adminTicketConfirm', compact('tickets', 'users', 'tujuans', 'kendaraans', 'jadwals'));
+    }
+
+    /**
+     * cancel
+     *
+     * @param  mixed $kode_ticket
+     * @return View
+     */
+    public function cancel(string $kode_ticket): View
+    {
+        //get ticket by kode_ticket
+        $tickets    = Ticket::where('kode_ticket', $kode_ticket)->firstOrFail();
+        $users      = User::all();
+        $tujuans    = Tujuan::all();
+        $kendaraans = Kendaraan::all();
+        $jadwals    = Jadwal::all();
+    
+        // Mengirim data tiket ke view
+        return view('adminTicketCancel', compact('tickets', 'users', 'tujuans', 'kendaraans', 'jadwals'));
     }
     
 

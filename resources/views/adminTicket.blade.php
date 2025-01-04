@@ -49,6 +49,7 @@
                                                         @if ($row->status_ticket == 'Menunggu Pembayaran')
                                                             <a href="{{ route('ticket.show', $row->kode_ticket) }}" class="btn btn-sm btn-secondary"> <i class='far fa-eye'></i> </a>
                                                             <a href="{{ route('ticket.confirm', $row->kode_ticket) }}" class="btn btn-sm btn-success"> <i class='far fa-check-circle'> </i></a>
+                                                            <a href="{{ route('ticket.cancel', $row->kode_ticket) }}" class="btn btn-sm btn-danger"> <i class='far fa-times-circle'> </i></a>
                                                            
                                                             
                                                         @else
