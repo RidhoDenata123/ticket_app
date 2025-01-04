@@ -1,4 +1,4 @@
-@extends('layouts.admin_app')
+@extends('layouts.user_app')
  
 @section('content')
 
@@ -20,35 +20,11 @@
                             <div class="col-md-12">
                                 <div class="card border-0">
                                     <div class="card-body">
-                                    <form action="{{ route('ticket.store') }}" method="POST" enctype="multipart/form-data">
+                                    <form action="{{ route('user.ticket.store') }}" method="POST">
+                                       
                                         
                                             @csrf
-
-                                            <div class="row">
-
-                                                    <div class="col-md-12">
-                                                        <div class="form-group mb-3">
-                                                            <label class="font-weight-bold">PEMESAN</label>
-                                                            <select class="form-select @error('id_user') is-invalid @enderror" name="id_user" require>
-                                                                <option value="">Pilih User</option>
-                                                                @foreach($users as $user)
-                                                                    <option value="{{ $user->id }}" {{ old('id_user') == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        
-                                                            <!-- error message untuk id_user -->
-                                                            @error('id_user')
-                                                                <div class="alert alert-danger mt-2">
-                                                                    {{ $message }}
-                                                                </div>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                            </div>
-
-                                           
-                                            <hr>
+                                            <input type="hidden" name="id_user" value="{{ $userId }}">
 
                                             <div class="form-group mb-3">
                                                             <label class="font-weight-bold">TANGGAL KEBERANGKATAN</label>
@@ -185,7 +161,7 @@
 
 
                                                     <div class="modal-footer">
-                                                        <a href="/admin/ticket" class="btn btn-md btn-basic me-4">CANCEL</a>
+                                                        <a href="/user/ticket" class="btn btn-md btn-basic me-4">CANCEL</a>
 
                                                         <div class="btn-group">
                                                             <button type="reset" class="btn btn-md btn-outline-dark"> <i class="fa fa-refresh"></i> RESET</button>
@@ -201,8 +177,88 @@
                         </div>
                     </div>
 
-                    
-            
+              <!-- jQuery -->
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+
+            <!-- Tambahkan CSS Select2 -->
+            <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+            <!-- Tambahkan JavaScript Select2 -->
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+
+                    <script>
+                    $(document).ready(function() {
+
+                    // Inisialisasi Select2 pada elemen select
+                    $('#kode_tujuan').select2({
+                            placeholder: "Pilih Tujuan",
+                            allowClear: true
+                        });
+
+                        $('#kode_jadwal').select2({
+                            placeholder: "Pilih Jadwal",
+                            allowClear: true
+                        });
+
+                        $('#kode_kendaraan').select2({
+                            placeholder: "Pilih Jadwal",
+                            allowClear: true
+                        });
+
+                        function calculateTotal() {
+                            var ticketPrice = parseFloat($('#ticket_price').val()) || 0;
+                            var costKendaraan = parseFloat($('#cost_kendaraan').val()) || 0;
+                            var totalTagihan = ticketPrice + costKendaraan;
+                            $('#total_tagihan').val(totalTagihan);
+                        }
+
+                        $('#kode_tujuan').change(function() {
+                            var kode_tujuan = $(this).val();
+                            if (kode_tujuan) {
+                                $.ajax({
+                                    url: '/user-get-ticket-price/' + kode_tujuan,
+                                    type: 'GET',
+                                    dataType: 'json',
+                                    success: function(data) {
+                                        $('#ticket_price').val(data.ticket_price);
+                                        calculateTotal();
+                                    }
+                                });
+                            } else {
+                                $('#ticket_price').val('');
+                                calculateTotal();
+                            }
+                        });
+
+                        $('#kode_kendaraan').change(function() {
+                            var kode_kendaraan = $(this).val();
+                            if (kode_kendaraan) {
+                                $.ajax({
+                                    url: '/user-get-cost-kendaraan/' + kode_kendaraan,
+                                    type: 'GET',
+                                    dataType: 'json',
+                                    success: function(data) {
+                                        $('#cost_kendaraan').val(data.cost_kendaraan);
+                                        calculateTotal();
+                                    }
+                                });
+                            } else {
+                                $('#cost_kendaraan').val('');
+                                calculateTotal();
+                            }
+                        });
+
+                        // Mengisi otomatis tgl_order dengan tanggal saat ini
+                        var today = new Date().toISOString().split('T')[0];
+                        $('#tgl_order').val(today);
+                    });
+                    </script>
 
                 </div>
             </div>
@@ -210,84 +266,5 @@
     </div>
 </div>
 
-
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
-
-<!-- Tambahkan CSS Select2 -->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
-<!-- Tambahkan JavaScript Select2 -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-
-
-<script>
-$(document).ready(function() {
-
- // Inisialisasi Select2 pada elemen select
- $('#kode_tujuan').select2({
-        placeholder: "Pilih Tujuan",
-        allowClear: true
-    });
-
-    $('#kode_jadwal').select2({
-        placeholder: "Pilih Jadwal",
-        allowClear: true
-    });
-
-    $('#kode_kendaraan').select2({
-        placeholder: "Pilih Jadwal",
-        allowClear: true
-    });
-    
-    function calculateTotal() {
-        var ticketPrice = parseFloat($('#ticket_price').val()) || 0;
-        var costKendaraan = parseFloat($('#cost_kendaraan').val()) || 0;
-        var totalTagihan = ticketPrice + costKendaraan;
-        $('#total_tagihan').val(totalTagihan);
-    }
-
-    $('#kode_tujuan').change(function() {
-        var kode_tujuan = $(this).val();
-        if (kode_tujuan) {
-            $.ajax({
-                url: '/get-ticket-price/' + kode_tujuan,
-                type: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    $('#ticket_price').val(data.ticket_price);
-                    calculateTotal();
-                }
-            });
-        } else {
-            $('#ticket_price').val('');
-            calculateTotal();
-        }
-    });
-
-    $('#kode_kendaraan').change(function() {
-        var kode_kendaraan = $(this).val();
-        if (kode_kendaraan) {
-            $.ajax({
-                url: '/get-cost-kendaraan/' + kode_kendaraan,
-                type: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    $('#cost_kendaraan').val(data.cost_kendaraan);
-                    calculateTotal();
-                }
-            });
-        } else {
-            $('#cost_kendaraan').val('');
-            calculateTotal();
-        }
-    });
-});
-</script>
 
 @endsection

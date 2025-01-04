@@ -29,7 +29,15 @@
 
                                             <div class="row">
 
-                                                    <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label class="font-weight-bold">KODE TICKET</label>
+                                                        <input type="text" class="form-control" name="kode_ticket" value="{{ old('kode_ticket', $tickets->kode_ticket) }}" readonly>
+                                            
+                                                    </div>
+                                            </div>
+
+                                                    <div class="col-md-6">
                                                         <div class="form-group mb-3">
                                                             <label class="font-weight-bold">PEMESAN</label>
                                                             <input type="text" class="form-control" value="{{ $tickets->user->name }}" readonly>

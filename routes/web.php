@@ -21,9 +21,14 @@ All Normal Users Routes List
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/user/home', [HomeController::class, 'userHome'])->name('home');
- 
+    Route::resource('/user/ticket', UserTicketController::class);
 
-
+    Route::resource('/user/ticket', UserTicketController::class);
+    Route::post('/user/ticket', [UserTicketController::class, 'store'])->name('user.ticket.store');
+    Route::get('/user/ticket/{id}', [UserTicketController::class, 'show'])->name('user.ticket.show');
+  
+    Route::get('/user-get-ticket-price/{kode_tujuan}', [UserTicketController::class, 'usergetTicketPrice']);
+    Route::get('/user-get-cost-kendaraan/{kode_kendaraan}', [UserTicketController::class, 'usergetCostKendaraan']);
 });
 
 /*------------------------------------------
@@ -39,7 +44,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('/admin/jadwal', JadwalController::class);
 
     Route::resource('/admin/ticket', TicketController::class);
-    Route::get('/admin/ticket/{id}', [TicketController::class, 'show'])->name('ticket.show');
+    Route::get('/admin/ticket/{id}', [TicketController::class, 'show'])->name('admin.ticket.show');
     Route::get('/admin/ticket/{id}/confirm', [TicketController::class, 'confirm'])->name('ticket.confirm');
     Route::get('/admin/ticket/{id}/cancel', [TicketController::class, 'cancel'])->name('ticket.cancel');
     

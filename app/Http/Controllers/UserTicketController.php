@@ -55,7 +55,7 @@ class UserTicketController extends Controller
         $tujuans = Tujuan::all();
         $kendaraans = Kendaraan::all();
         $jadwals = Jadwal::all();
-       
+        $userId = Auth::id(); // Mendapatkan ID pengguna yang sedang login
         
         // Mengirim data pengguna yang login, semua pengguna, dan semua tujuan ke view
         return view('userTicketCreate', [
@@ -63,11 +63,9 @@ class UserTicketController extends Controller
             'tujuans' => $tujuans,
             'kendaraans' => $kendaraans,
             'jadwals' => $jadwals,
-            'currentUser' => Auth::user()
+            'userId' => $userId
         ]);
     }
-
-
 
  /**
      * SIMPAN DATA TUJUAN
@@ -112,14 +110,12 @@ class UserTicketController extends Controller
         ]);
 
         //redirect to index
-        return redirect()->to('/admin/ticket')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->to('/user/ticket')->with(['success' => 'Data Berhasil Disimpan!']);
     
     }
-    
-    
-    
+     
 
-    public function getTicketPrice($kode_tujuan)
+    public function usergetTicketPrice($kode_tujuan)
     {
         // Mengambil tujuan berdasarkan kode_tujuan
         $tujuan = Tujuan::where('kode_tujuan', $kode_tujuan)->first();
@@ -128,7 +124,7 @@ class UserTicketController extends Controller
         return response()->json(['ticket_price' => $tujuan->ticket_price]);
     }
 
-    public function getCostKendaraan($kode_kendaraan)
+    public function usergetCostKendaraan($kode_kendaraan)
     {
         // Mengambil kendaraan berdasarkan kode_kendaraan
         $kendaraan = Kendaraan::where('kode_kendaraan', $kode_kendaraan)->first();
@@ -136,7 +132,6 @@ class UserTicketController extends Controller
         // Mengembalikan biaya kendaraan dalam format JSON
         return response()->json(['cost_kendaraan' => $kendaraan->cost_kendaraan]);
     }
-    
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
@@ -151,136 +146,10 @@ class UserTicketController extends Controller
         $ticket = Ticket::with(['user', 'tujuan', 'kendaraan', 'jadwal'])->findOrFail($id);
 
         // Mengirim data tiket ke view
-        return view('adminTicketShow', compact('ticket'));
+        return view('userTicketShow', compact('ticket'));
     }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/**
-     * edit
-     *
-     * @param  mixed $kode_ticket
-     * @return View
-     */
-    public function edit(string $kode_ticket): View
-    {
-        //get ticket by kode_ticket
-        $tickets    = Ticket::where('kode_ticket', $kode_ticket)->firstOrFail();
-        $users      = User::all();
-        $tujuans    = Tujuan::all();
-        $kendaraans = Kendaraan::all();
-        $jadwals    = Jadwal::all();
-    
-        // Mengirim data tiket ke view
-        return view('adminTicketEdit', compact('tickets', 'users', 'tujuans', 'kendaraans', 'jadwals'));
-    }
-
-/**
-     * update
-     *
-     * @param  mixed $request
-     * @param  mixed $kode_ticket
-     * @return RedirectResponse
-     */
-    public function update(Request $request, $kode_ticket): RedirectResponse
-    {
-        // Validasi form
-        $request->validate([
-            'id_user'               => 'required|min:1',
-            'kode_tujuan'           => 'required|min:1',
-            'kode_jadwal'           => 'required|min:1',
-            'kode_kendaraan'        => 'required|min:1',
-            'ticket_price'          => 'required|min:1',
-            'cost_kendaraan'        => 'required|min:1',
-            'total_tagihan'         => 'required|min:1',
-            'tgl_order'             => 'required|date',
-            'tgl_bayar'             => 'required|min:1',
-            'status_ticket'         => 'required|min:1',
-            'kode_verifikasi'       => 'required|min:1'
-        ]);
-
-        //get ticket by kode_ticket
-        $tickets = Ticket::where('kode_ticket', $kode_ticket)->firstOrFail();
-
-        //update ticket 
-        $tickets->update([
-            'id_user'           => $request->id_user,
-            'kode_tujuan'       => $request->kode_tujuan,
-            'kode_jadwal'       => $request->kode_jadwal,
-            'kode_kendaraan'    => $request->kode_kendaraan,
-            'ticket_price'      => $request->ticket_price,
-            'cost_kendaraan'    => $request->cost_kendaraan,
-            'total_tagihan'     => $request->total_tagihan,
-            'tgl_order'         => $request->tgl_order,
-            'tgl_bayar'         => $request->tgl_bayar,
-            'status_ticket'     => $request->status_ticket,
-            'kode_verifikasi'   => $request->kode_verifikasi,
-        ]);
-
-        //redirect to index
-        return redirect()->to('/admin/ticket')->with(['success' => 'Data Berhasil Diubah!']);
-    }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * destroy
-     *
-     * @param  mixed $kode_ticket
-     * @return RedirectResponse
-     */
-    public function destroy($kode_ticket): RedirectResponse
-    {
-        //get tujuan by kode_ticket
-        $tickets = Ticket::where('kode_ticket', $kode_ticket)->firstOrFail();
-
-        //delete tujuan
-        $tickets->delete();
-
-        //redirect to index
-        return redirect()->to('/admin/ticket')->with(['success' => 'Data Berhasil Dihapus!']);
-    }
-
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * confirm
-     *
-     * @param  mixed $kode_ticket
-     * @return View
-     */
-    public function confirm(string $kode_ticket): View
-    {
-        //get ticket by kode_ticket
-        $tickets    = Ticket::where('kode_ticket', $kode_ticket)->firstOrFail();
-        $users      = User::all();
-        $tujuans    = Tujuan::all();
-        $kendaraans = Kendaraan::all();
-        $jadwals    = Jadwal::all();
-    
-        // Mengirim data tiket ke view
-        return view('adminTicketConfirm', compact('tickets', 'users', 'tujuans', 'kendaraans', 'jadwals'));
-    }
-
-    /**
-     * cancel
-     *
-     * @param  mixed $kode_ticket
-     * @return View
-     */
-    public function cancel(string $kode_ticket): View
-    {
-        //get ticket by kode_ticket
-        $tickets    = Ticket::where('kode_ticket', $kode_ticket)->firstOrFail();
-        $users      = User::all();
-        $tujuans    = Tujuan::all();
-        $kendaraans = Kendaraan::all();
-        $jadwals    = Jadwal::all();
-    
-        // Mengirim data tiket ke view
-        return view('adminTicketCancel', compact('tickets', 'users', 'tujuans', 'kendaraans', 'jadwals'));
-    }
-    
 
 }

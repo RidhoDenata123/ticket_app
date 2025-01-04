@@ -23,7 +23,7 @@
                                     <div class="card-body">
                                         <a href="/user/ticket/create" class="btn btn-md btn-primary mb-3"><i class='fas fa-plus'></i> Add</a> 
                                         <a href="/user/ticket" class="btn btn-md btn-outline-dark mb-3"><i class='fa fa-refresh'></i></a>
-                                        <table class="table table-bordered">
+                                        <table id="ticketTable" class="table table-bordered">
                                         <thead>
                                             <tr>
                                                 <th scope="col">No.</th>
@@ -46,16 +46,10 @@
                                                     <td>{{ $row->status_ticket }}</td>
                                                     <td class="text-center">
                                                         
-                                                        @if ($row->status_ticket == 'Menunggu Pembayaran')
-                                                            <a href="{{ route('ticket.show', $row->kode_ticket) }}" class="btn btn-sm btn-secondary"> <i class='far fa-eye'></i> </a>
-                                                            <a href="{{ route('ticket.confirm', $row->kode_ticket) }}" class="btn btn-sm btn-success"> <i class='far fa-check-circle'> </i></a>
-                                                            <a href="{{ route('ticket.cancel', $row->kode_ticket) }}" class="btn btn-sm btn-danger"> <i class='far fa-times-circle'> </i></a>
-                                                           
-                                                            
-                                                        @else
-                                                        <a href="{{ route('ticket.show', $row->kode_ticket) }}" class="btn btn-sm btn-secondary"> <i class='far fa-eye'></i> </a>
+                                            
+                                                        <a href="{{ route('user.ticket.show', $row->kode_ticket) }}" class="btn btn-sm btn-secondary"> <i class='far fa-eye'></i> </a>
 
-                                                        @endif
+                                                        
                                                     </td>
                                                 </tr>
                                             @empty
@@ -72,7 +66,12 @@
                         </div>
                     </div>
 
-                    
+                <script>
+                    $(document).ready(function() {
+                        $('#ticketTable').DataTable();
+                    });
+
+                </script>
 
                 </div>
             </div>
