@@ -6,6 +6,7 @@ use App\Http\Controllers\TujuanController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\UserTicketController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,16 +21,8 @@ All Normal Users Routes List
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/user/home', [HomeController::class, 'userHome'])->name('home');
-    Route::resource('/user/ticket', TicketController::class);
+ 
 
-    Route::resource('/user/ticket', TicketController::class);
-    Route::get('/user/ticket/{id}', [TicketController::class, 'show'])->name('ticket.show');
-    Route::get('/user/ticket/{id}/confirm', [TicketController::class, 'confirm'])->name('ticket.confirm');
-    Route::get('/user/ticket/{id}/cancel', [TicketController::class, 'cancel'])->name('ticket.cancel');
-    
-
-    Route::get('/get-ticket-price/{kode_tujuan}', [TicketController::class, 'getTicketPrice']);
-    Route::get('/get-cost-kendaraan/{kode_kendaraan}', [TicketController::class, 'getCostKendaraan']);
 
 });
 

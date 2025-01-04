@@ -1,4 +1,4 @@
-@extends('layouts.admin_app')
+@extends('layouts.user_app')
  
 @section('content')
 
@@ -21,9 +21,9 @@
                                 
                                 <div class="card border-0">
                                     <div class="card-body">
-                                        <a href="/admin/ticket/create" class="btn btn-md btn-primary mb-3"><i class='fas fa-plus'></i> Add</a> 
-                                        <a href="/admin/ticket" class="btn btn-md btn-outline-dark mb-3"><i class='fa fa-refresh'></i></a>
-                                        <table id="ticketTable" class="table table-bordered">
+                                        <a href="/user/ticket/create" class="btn btn-md btn-primary mb-3"><i class='fas fa-plus'></i> Add</a> 
+                                        <a href="/user/ticket" class="btn btn-md btn-outline-dark mb-3"><i class='fa fa-refresh'></i></a>
+                                        <table class="table table-bordered">
                                         <thead>
                                             <tr>
                                                 <th scope="col">No.</th>
@@ -72,12 +72,7 @@
                         </div>
                     </div>
 
-                    <script>
-                    $(document).ready(function() {
-                        $('#ticketTable').DataTable();
-                    });
-
-                </script>
+                    
 
                 </div>
             </div>
