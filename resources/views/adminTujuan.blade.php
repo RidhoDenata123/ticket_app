@@ -57,7 +57,7 @@
                                             @endforelse
                                         </tbody>
                                     </table>
-                                        {{ $tujuans->links() }}
+                                       
                                     </div>
                                 </div>
                             </div>

@@ -7,6 +7,57 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+
+ticket_app
+
+php artisan make:model Product -m
+php artisan make:controller ProductController
+php artisan make:seeder CreateUsersSeeder
+php artisan db:seed --class=CreateUsersSeeder
+
+------------------------
+TABEL MASTER :
+
++ tbl_user
+	- id_user
+	- nama_user
+
++ tbl_tujuan
+	- id_tujuan
+	- nama_tujuan
+	- desc_tujuan
+	- ticket_price
+
++ tbl_kendaraan
+	- kode_kendaraan
+	- nama_kendaraan
+	- desc_kendaraan
+	- cost_kendaraan
+
++ tbl_jadwal
+	- kode_jadwal
+	- jam_berangkat
+	- jam_tiba
+
+------------------------
+TABEL TRANSAKSI
+
++ tbl_ticket_order
+	- kode_ticket
+	- id_user
+	- kode_tujuan
+	- kode_jadwal
+	- kode_kendaraan
+	- ticket_price
+	- cost_kendaraan
+	- total_tagihan
+	- tgl_order
+	- tgl_bayar
+	- status_ticket
+	- kode_verifikasi
+
+
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

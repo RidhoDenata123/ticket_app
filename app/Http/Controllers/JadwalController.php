@@ -24,8 +24,8 @@ class JadwalController extends Controller
     public function index() : View
     {
         //get all jadwals
-        $jadwals = Jadwal::latest()->paginate(10);
-
+        $jadwals = Jadwal::all();
+        
         //render view with jadwals
         return view('adminjadwal', compact('jadwals'));
     }

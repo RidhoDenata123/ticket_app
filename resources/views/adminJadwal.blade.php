@@ -58,7 +58,7 @@
                                             @endforelse
                                         </tbody>
                                     </table>
-                                        {{ $jadwals->links() }}
+                                        
                                     </div>
                                 </div>
                             </div>

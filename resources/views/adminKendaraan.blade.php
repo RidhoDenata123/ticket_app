@@ -58,7 +58,7 @@
                                         </tbody>
                                     </table>
                                     <br>
-                                        {{ $kendaraans->links() }}
+                                     
                                     </div>
                                 </div>
                             </div>

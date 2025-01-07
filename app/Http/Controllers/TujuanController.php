@@ -24,7 +24,8 @@ class TujuanController extends Controller
     public function index() : View
     {
         //get all tujuans
-        $tujuans = Tujuan::latest()->paginate(10);
+   
+        $tujuans = Tujuan::all();
 
         //render view with tujuans
         return view('adminTujuan', compact('tujuans'));

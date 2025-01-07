@@ -33,7 +33,7 @@ class UserTicketController extends Controller
        $tickets = Ticket::with(['user', 'tujuan', 'kendaraan'])
                         ->where('id_user', $userId)
                         ->latest()
-                        ->paginate(10);
+                        ->paginate(100);
 
         //render view with tickets
         

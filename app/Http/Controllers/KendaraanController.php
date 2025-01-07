@@ -25,7 +25,7 @@ class KendaraanController extends Controller
     public function index() : View
     {
         //get all kendaraans
-        $kendaraans = Kendaraan::latest()->paginate(10);
+        $kendaraans = Kendaraan::all();
 
         //render view with kendaraans
         return view('adminKendaraan', compact('kendaraans'));

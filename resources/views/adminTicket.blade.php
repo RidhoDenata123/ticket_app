@@ -65,7 +65,7 @@
                                             @endforelse
                                         </tbody>
                                     </table>
-                                        {{ $tickets->links() }}
+                                       
                                     </div>
                                 </div>
                             </div>

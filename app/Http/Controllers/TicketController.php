@@ -29,8 +29,7 @@ class TicketController extends Controller
     public function index() : View
     {
         // Mengambil data tiket beserta data yang terkait
-        $tickets = Ticket::with(['user', 'tujuan', 'kendaraan'])->latest()->paginate(10);
-
+        $tickets = Ticket::with(['user', 'tujuan', 'kendaraan'])->get();
         //render view with tickets
         
         return view('adminTicket', compact('tickets'));
