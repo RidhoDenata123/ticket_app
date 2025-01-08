@@ -20,9 +20,5 @@ class DatabaseSeeder extends Seeder
         Kendaraan::factory(10)->create();
         Jadwal::factory(10)->create();
         Ticket::factory(10)->create();
-        $this->call([
-           
-            TicketSeeder::class
-        ]);
     }
 }
